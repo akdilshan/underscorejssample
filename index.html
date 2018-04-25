@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Getting started - starter example with Underscore.find</title>
+    <script data-require="underscore.js@1.8.3" data-semver="1.8.3" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script data-require="jquery@1.11.0" data-semver="1.11.0" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div>Example output:</div>
+    <div id="output"></div>
+    <script>
+    var bicycles = [{
+      name: "A fast bike",
+      type: ["Road Bike","Urban Bike"],
+      color: "red"
+    }, {
+      name: "An even faster bike",
+      type: "Road Bike",
+      color: "red"
+    }, {
+      name: "A springy bike",
+      type: "Mountain Bike",
+      color: "red"
+    }, {
+      name: "A springier bike",
+      type: "Mountain Bike",
+      color: "red"
+    }, {
+      name: "A all-terain bike",
+      type: "Mountain Bike",
+      color: "blue"
+    }, {
+      name: "A classy bike",
+      type: "Urban Bike",
+      color: "red"
+    }, {
+      name: "A modern bike",
+      type: "Urban Bike",
+      color: "red"
+    }, {
+      name: "A blue bike",
+      type: "Children Bike",
+      color: "blue"
+    }, {
+      name: "A pink bike",
+      type: "Children Bike",
+      color: "blue"
+    }, {
+      name: "A noisy bike",
+      type: "Children Bike",
+      color: "red"
+    }, {
+      name: "A clown bike",
+      type: "Children Bike",
+      color: "red"
+    }];
+
+    var groupedByObject = function() {
+      var x=_.chain(bicycles).groupBy('type').pairs().map(x => {
+        return {'Type':x[0]
+          , 'group':_.chain(x[1]).groupBy('color')
+        }
+        
+      });
+    
+      
+      return x;
+    }();
+
+    $(document).ready(function() {
+      var outputContent = JSON.stringify(groupedByObject, null, 2);
+      
+      $("#output").html(outputContent);
+    });
+  </script>
+  </body>
+
+</html>
